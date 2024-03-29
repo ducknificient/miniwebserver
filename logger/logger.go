@@ -47,7 +47,7 @@ func NewLogger(config configpackage.Configuration) (defaultlogger *DefaultLogger
 
 	//check log folder is exist
 	if _, err := os.Stat(*defaultconfig.PathLog); os.IsNotExist(err) {
-		err := os.MkdirAll(*defaultconfig.PathLog, 0766)
+		err := os.MkdirAll(*defaultconfig.PathLog, 0744)
 		if err != nil {
 			return defaultlogger, err
 		}
