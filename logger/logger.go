@@ -3,7 +3,7 @@ package logger
 import (
 	"encoding/json"
 	"fmt"
-	"miniwebserver/config"
+	configpackage "miniwebserver/config"
 	"os"
 	"path/filepath"
 
@@ -39,7 +39,7 @@ func MyCaller(caller zapcore.EntryCaller, enc zapcore.PrimitiveArrayEncoder) {
 	enc.AppendString(filepath.Base(caller.FullPath()))
 }
 
-func NewLogger(config config.Configuration) (defaultlogger *DefaultLogger, err error) {
+func NewLogger(config configpackage.Configuration) (defaultlogger *DefaultLogger, err error) {
 
 	defaultconfig := config.GetConfiguration()
 
@@ -47,7 +47,7 @@ func NewLogger(config config.Configuration) (defaultlogger *DefaultLogger, err e
 
 	//check log folder is exist
 	if _, err := os.Stat(*defaultconfig.PathLog); os.IsNotExist(err) {
-		err := os.MkdirAll(*config.GetConfiguration().PathLog, 0766)
+		err := os.MkdirAll(*defaultconfig.PathLog, 0766)
 		if err != nil {
 			return defaultlogger, err
 		}

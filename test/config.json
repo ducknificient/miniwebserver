@@ -1,0 +1,9 @@
+{
+    "appname": "miniwebserver",
+    "appip": "0.0.0.0",
+    "appport": "8201",
+    "production": "false",
+    "version": "0.1-beta",
+    "pathlog": "/home/jeremykenn/Projects/miniwebserver/temp/log",
+    "filesep": "/"
+}

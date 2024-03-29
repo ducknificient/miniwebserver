@@ -31,7 +31,6 @@ func init() {
 	config, err = configpackage.NewConfiguration(configPath)
 	if err != nil {
 		panic(err)
-		return
 	}
 }
 
@@ -48,7 +47,7 @@ func main() {
 	*/
 	logger, err := loggerpackage.NewLogger(config)
 	if err != nil {
-		logger.Fatal(fmt.Sprintf("unable to init logger: %v", err.Error()))
+		panic(fmt.Sprintf("unable to init logger: %v\n", err.Error()))
 	}
 
 	/*
