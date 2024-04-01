@@ -2,7 +2,6 @@ package logger
 
 import (
 	"encoding/json"
-	"fmt"
 	configpackage "miniwebserver/config"
 	"os"
 	"path/filepath"
@@ -42,8 +41,6 @@ func MyCaller(caller zapcore.EntryCaller, enc zapcore.PrimitiveArrayEncoder) {
 func NewLogger(config configpackage.Configuration) (defaultlogger *DefaultLogger, err error) {
 
 	defaultconfig := config.GetConfiguration()
-
-	fmt.Println(*defaultconfig.PathLog)
 
 	//check log folder is exist
 	if _, err := os.Stat(*defaultconfig.PathLog); os.IsNotExist(err) {
