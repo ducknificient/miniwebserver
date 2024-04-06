@@ -2,7 +2,6 @@ package logger
 
 import (
 	"encoding/json"
-	"fmt"
 	configpackage "miniwebserver/config"
 	"os"
 	"path/filepath"
@@ -39,29 +38,27 @@ func MyCaller(caller zapcore.EntryCaller, enc zapcore.PrimitiveArrayEncoder) {
 	enc.AppendString(filepath.Base(caller.FullPath()))
 }
 
-func NewLogger(config configpackage.Configuration) (defaultlogger *DefaultLogger, err error) {
+func NewLogger(config configpackage.Configuration) (logger *DefaultLogger, err error) {
 
-	defaultconfig := config.GetConfiguration()
-
-	fmt.Println(*defaultconfig.PathLog)
+	appconfig := config.GetConfiguration()
 
 	//check log folder is exist
-	if _, err := os.Stat(*defaultconfig.PathLog); os.IsNotExist(err) {
-		err := os.MkdirAll(*defaultconfig.PathLog, 0744)
+	if _, err := os.Stat(*appconfig.PathLog); os.IsNotExist(err) {
+		err := os.MkdirAll(*appconfig.PathLog, 0744)
 		if err != nil {
-			return defaultlogger, err
+			return logger, err
 		}
 	}
 
 	//create log file and setting rotate time (24 hours)
 	// logFile := _pathlog + _filesep + "app-%Y-%m-%d-%H.log"
-	logFile := *defaultconfig.PathLog + *defaultconfig.FileSep + "app-%Y-%m-%d.log"
+	logFile := *appconfig.PathLog + *appconfig.FileSep + "app-%Y-%m-%d.log"
 	rotator, err := rotatelogs.New(
 		logFile,
 		rotatelogs.WithMaxAge(45*24*time.Hour),
 		rotatelogs.WithRotationTime(24*time.Hour))
 	if err != nil {
-		return defaultlogger, err
+		return logger, err
 	}
 
 	// initialize the JSON encoding config
@@ -77,7 +74,7 @@ func NewLogger(config configpackage.Configuration) (defaultlogger *DefaultLogger
 
 	var encCfg zapcore.EncoderConfig
 	if err := json.Unmarshal(data, &encCfg); err != nil {
-		return defaultlogger, err
+		return logger, err
 	}
 	encCfg.EncodeTime = SyslogTimeEncoder
 	encCfg.EncodeCaller = MyCaller
@@ -90,11 +87,11 @@ func NewLogger(config configpackage.Configuration) (defaultlogger *DefaultLogger
 		zap.InfoLevel)
 	zap.New(core)
 
-	defaultlogger = &DefaultLogger{
+	logger = &DefaultLogger{
 		logger: zap.New(core, zap.WithCaller(true), zap.AddStacktrace(zap.ErrorLevel)),
 	}
 
-	return defaultlogger, nil
+	return logger, nil
 }
 
 func (l *DefaultLogger) Info(msg string) {
