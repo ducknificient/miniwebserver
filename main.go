@@ -49,6 +49,7 @@ func main() {
 	if err != nil {
 		panic(fmt.Sprintf("unable to init logger: %v\n", err.Error()))
 	}
+	logger.CheckPathFile()
 
 	/*
 		SETUP CONTROLLER

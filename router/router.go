@@ -23,6 +23,9 @@ func NewRouter(config config.Configuration, controller controller.Controller) *D
 	router.GET("/", gin.WrapF(controller.Root))
 	router.OPTIONS("/*path", gin.WrapF(controller.Options))
 	router.GET("/about/version", gin.WrapF(controller.About))
+	router.GET("/serve/:path/:file", gin.WrapF(controller.ServeFile))
+	router.GET("/upload/", gin.WrapF(controller.UploadPage))
+	router.POST("/upload/file", gin.WrapF(controller.UploadFile))
 
 	return &DefaultRouter{
 		Router: router,

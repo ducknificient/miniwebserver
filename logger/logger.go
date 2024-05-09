@@ -21,6 +21,7 @@ type Logger interface {
 }
 
 type DefaultLogger struct {
+	config configpackage.Configuration
 	logger *zap.Logger
 }
 
@@ -88,10 +89,32 @@ func NewLogger(config configpackage.Configuration) (logger *DefaultLogger, err e
 	zap.New(core)
 
 	logger = &DefaultLogger{
+		config: config,
 		logger: zap.New(core, zap.WithCaller(true), zap.AddStacktrace(zap.ErrorLevel)),
 	}
 
 	return logger, nil
+}
+
+func (l *DefaultLogger) CheckPathFile() (err error) {
+
+	//check folder is exist
+	if _, err := os.Stat(*l.config.GetConfiguration().PathFile); os.IsNotExist(err) {
+		err := os.MkdirAll(*l.config.GetConfiguration().PathFile, 0744)
+		if err != nil {
+			return err
+		}
+	}
+
+	//check folder is exist
+	if _, err := os.Stat(*l.config.GetConfiguration().PathMedia); os.IsNotExist(err) {
+		err := os.MkdirAll(*l.config.GetConfiguration().PathMedia, 0744)
+		if err != nil {
+			return err
+		}
+	}
+
+	return err
 }
 
 func (l *DefaultLogger) Info(msg string) {
