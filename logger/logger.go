@@ -106,9 +106,8 @@ func (l *DefaultLogger) CheckPathFile() (err error) {
 		}
 	}
 
-	//check folder is exist
-	if _, err := os.Stat(*l.config.GetConfiguration().PathMedia); os.IsNotExist(err) {
-		err := os.MkdirAll(*l.config.GetConfiguration().PathMedia, 0744)
+	if _, err := os.Stat(*l.config.GetConfiguration().PathUpload); os.IsNotExist(err) {
+		err := os.MkdirAll(*l.config.GetConfiguration().PathUpload, 0744)
 		if err != nil {
 			return err
 		}

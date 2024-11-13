@@ -19,10 +19,10 @@ type AppConfiguration struct {
 	Version    *string `json:"version"`
 
 	// path
-	PathTemp  *string `json:"pathtemp"`
-	PathLog   *string `json:"pathlog"`
-	PathFile  *string `json:"pathfile"`
-	PathMedia *string `json:"pathmedia"`
+	PathTemp   *string `json:"pathtemp"`
+	PathLog    *string `json:"pathlog"`
+	PathFile   *string `json:"pathfile"`
+	PathUpload *string `json:"pathupload"`
 
 	// misc
 	FileSep *string `json:"filesep"`

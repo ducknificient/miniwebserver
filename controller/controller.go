@@ -72,10 +72,8 @@ func (u *DefaultController) ServeFile(w http.ResponseWriter, r *http.Request) {
 	fmt.Printf("path: %v, file: %v\n", path, file)
 
 	switch path {
-	case "book":
+	case "file":
 		servePath = *u.config.GetConfiguration().PathFile + _filesep + file
-	case "media":
-		servePath = *u.config.GetConfiguration().PathMedia + _filesep + file
 	default:
 		u.response.Default(w, http.StatusNotFound, false, "file tidak ditemukan")
 		return
@@ -163,7 +161,7 @@ func (u *DefaultController) UploadFile(w http.ResponseWriter, r *http.Request) {
 		}
 		defer file.Close()
 
-		filename := *u.config.GetConfiguration().PathTemp + *u.config.GetConfiguration().FileSep + `html` + *u.config.GetConfiguration().FileSep + fileHeader.Filename
+		filename := *u.config.GetConfiguration().PathUpload + *u.config.GetConfiguration().FileSep + fileHeader.Filename
 
 		// Create a new file in the server's upload directory
 		f, err := os.OpenFile(filename, os.O_WRONLY|os.O_CREATE, 0666)
@@ -180,4 +178,7 @@ func (u *DefaultController) UploadFile(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 	}
+
+	u.response.Default(w, http.StatusOK, true, "ok")
+	return
 }

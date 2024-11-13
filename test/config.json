@@ -4,6 +4,9 @@
     "appport": "8201",
     "production": "false",
     "version": "0.1-beta",
-    "pathlog": "/home/spil/Projects/miniwebserver/temp/log",
+    "pathtemp": "/home/jeremykenn/miniwebserver/temp",
+    "pathlog": "/home/jeremykenn/miniwebserver/temp/log",
+    "pathfile":"/home/jeremykenn/miniwebserver/temp/file",
+    "pathupload":"/home/jeremykenn/miniwebserver/temp/upload",
     "filesep": "/"
 }
