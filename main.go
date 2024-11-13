@@ -79,8 +79,15 @@ func main() {
 		Handler: httprouter.Router,
 	}, logger)
 
-	// run server
-	httpserver.Run()
+	if *config.Production == `true` {
+		httpserver.SetCertificate(*config.Certificate, *config.CertificateKey)
+
+		// run server
+		httpserver.RunTLS()
+
+	} else {
+		httpserver.Run()
+	}
 
 	/*
 		Graceful shutdown

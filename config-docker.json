@@ -2,11 +2,13 @@
     "appname": "miniwebserver",
     "appip": "0.0.0.0",
     "appport": "8201",
-    "production": "false",
+    "production": "true",
     "version": "0.1-beta",
-    "pathtemp": "/home/jeremykenn/miniwebserver/temp",
-    "pathlog": "/home/jeremykenn/miniwebserver/temp/log",
-    "pathfile":"/home/jeremykenn/miniwebserver/temp/file",
-    "pathupload":"/home/jeremykenn/miniwebserver/temp/upload",
+    "pathtemp": "/go/src/app/temp",
+    "pathlog": "/go/src/app/log",
+    "pathfile":"/go/src/app/file",
+    "pathupload":"/go/src/app/upload",
+    "certificate":"/go/src/app/fullchain.pem",
+    "certificatekey":"/go/src/app/privkey.pem",
     "filesep": "/"
 }

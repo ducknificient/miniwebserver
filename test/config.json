@@ -8,5 +8,7 @@
     "pathlog": "/home/jeremykenn/miniwebserver/temp/log",
     "pathfile":"/home/jeremykenn/miniwebserver/temp/file",
     "pathupload":"/home/jeremykenn/miniwebserver/temp/upload",
+    "certificate":"/home/jeremykenn/miniwebserver/fullchain.pem",
+    "certificatekey":"/home/jeremykenn/miniwebserver/privkey.pem",
     "filesep": "/"
 }
