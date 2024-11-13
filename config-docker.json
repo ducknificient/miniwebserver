@@ -1,14 +1,14 @@
 {
     "appname": "miniwebserver",
     "appip": "0.0.0.0",
-    "appport": "8201",
+    "appport": "8243",
     "production": "true",
     "version": "0.1-beta",
     "pathtemp": "/go/src/app/temp",
     "pathlog": "/go/src/app/log",
-    "pathfile":"/go/src/app/file",
-    "pathupload":"/go/src/app/upload",
-    "certificate":"/go/src/app/fullchain.pem",
-    "certificatekey":"/go/src/app/privkey.pem",
+    "pathfile":"/go/src/app/temp/file",
+    "pathupload":"/go/src/app/temp/upload",
+    "certificate":"/go/src/app/server.crt",
+    "certificatekey":"/go/src/app/server.key",
     "filesep": "/"
 }
